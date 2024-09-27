@@ -50,10 +50,10 @@ INSERT INTO pessoa (nome, sexo, idioma) VALUES
 
 -- Inserir dados na tabela alunos
 INSERT INTO alunos (nome, idade, curso) VALUES 
-("Romeo", 19, "CC"),
+("Gilberto", 19, "CC"),
 ("Anthony", 21, "UFC"),
 ("Bruno", 19, "POD"),
-("Gilberto", 20, "SI"),
+("Romeo", 20, "SI"),
 ("Ricardo", 30, "TI");
 
 -- Inserir dados na tabela professores
