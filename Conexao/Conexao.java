@@ -11,7 +11,7 @@ public class Conexao {
         try {
             
             conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/dbAula?useTimezone=true&serverTimezone=UTC", 
+                "jdbc:mysql://localhost:3306/BDAula01?useTimezone=true&serverTimezone=UTC", 
                 "root", 
                 "laboratorio"
             );
