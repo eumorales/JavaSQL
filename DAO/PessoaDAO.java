@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PessoaDAO {
     private Conexao conexao;
@@ -83,7 +85,32 @@ public class PessoaDAO {
     }
 }
     
-        
+public List<Pessoa> getPessoasNome(String nome, String sexo) {
+    String sql = "SELECT * FROM pessoa WHERE nome LIKE ? and sexo LIKE ?";
+
+    try {
+        PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        stmt.setString(1, "%" + nome + "%");
+        stmt.setString(2, "%" + sexo + "%");
+
+        ResultSet rs = stmt.executeQuery();
+        List<Pessoa> listaPessoas = new ArrayList<>(); 
+
+        while (rs.next()) {
+            Pessoa p = new Pessoa();
+            p.setId(rs.getInt("id"));
+            p.setNome(rs.getString("nome"));
+            p.setSexo(rs.getString("sexo"));
+            p.setIdioma(rs.getString("idioma"));
+            listaPessoas.add(p);
+        }
+        return listaPessoas;
+    } catch (SQLException ex) {
+        System.out.println("Erro ao consultar todas as pessoas: " + ex.getMessage());
+        return null;
+    }
+}
+
 
 public Pessoa getPessoa(int id) {
     String sql = "SELECT * FROM pessoa WHERE id = ?";
@@ -111,4 +138,32 @@ public Pessoa getPessoa(int id) {
         return null;
     }
 }
+
+public List<Pessoa> getPessoas() {
+
+    String sql = "SELECT * FROM pessoa";
+    try {
+
+        PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+        ResultSet rs = stmt.executeQuery(); // obtenho o retorno da consulta e armazeno no ResultSet
+        List<Pessoa> listaPessoas = new ArrayList<>(); // Preparo uma lista de objetos que vou armazenar a consulta
+        // Percorre rs e salvar as informações dentro de um objeto Pessoa e depois adiciona na lista
+        while (rs.next()) {
+            Pessoa p = new Pessoa();
+            p.setId(rs.getInt("id"));
+            p.setNome(rs.getString("nome"));
+            p.setSexo(rs.getString("sexo"));
+            p.setIdioma(rs.getString("idioma"));
+            listaPessoas.add(p);
+        }
+        return listaPessoas;
+    } catch (SQLException ex) {
+        System.out.println("Erro ao consultar todas as pessoas: " + ex.getMessage());
+        return null;
+    }
+}
+
+
+
 }

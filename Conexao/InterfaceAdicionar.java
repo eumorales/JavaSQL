@@ -42,7 +42,7 @@ public class InterfaceAdicionar extends javax.swing.JFrame {
         txtNome = new javax.swing.JTextField();
         lblSQL = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblNome.setText("Nome:");
 
